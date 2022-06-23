@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import "intro.js/introjs.css";
+import { Steps } from "intro.js-react";
+import React, { useState } from "react";
 function App() {
+  const [enabled, setEnabled] = useState(true);
+  const [initialStep, setInitialStep] = useState(0);
+
+  const onExit = () => {
+    setEnabled(false);
+  };
+  const steps = [
+    {
+      element: "#help",
+      intro: "You can use this button for help",
+      position: "right",
+    },
+    {
+      element: "#about",
+      intro: "You can use this button to get more information",
+    },
+    {
+      element: "#contact",
+      intro: "You can use this button to contact us",
+    },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Steps
+        enabled={enabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+      />
+      <div id="buttonRow">
+        <button id="help">Help</button>
+        <button id="about">About</button>
+        <button id="contact">Contact Us</button>
+      </div>
     </div>
   );
 }
-
 export default App;
